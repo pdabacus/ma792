@@ -26,8 +26,8 @@ py3_url="https://raw.githubusercontent.com/pdabacus/ma792/main/rnn.py"
 py3_md5="2d568e56d1979ab417977814ff828ac4"
 py3_out="rnn.py"
 
-rnn_url="https://github.com/pdabacus/ma792/releases/download/v1.2/happy_angry_rnn.pt"
-rnn_md5="c028e23ad1b5c7743813da7af3184398"
+rnn_url="https://github.com/pdabacus/ma792/releases/download/v1.4/happy_angry_rnn.pt"
+rnn_md5="d9fc2dd8ec3a6877ac41d2dba28d604a"
 rnn_out="happy_angry_rnn.pt"
 
 if ! [ -d "downloads" ]; then

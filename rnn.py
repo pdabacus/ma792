@@ -1,5 +1,5 @@
 """
-read in imdb reviews and preprocess by removing symbols and stopwords
+train lstm rnn using imdb reviews through the glove embedding
 """
 
 import torch
