@@ -6,6 +6,7 @@ import torch
 import torch.nn
 import numpy as np
 
+import glove
 import imdb
 
 _version = "1.0.0"
@@ -86,7 +87,7 @@ def main():
     output_dim = 2
     model = HappyAngryRNN(
         hyperparams["review_length"],
-        glove_embedding,
+        glove.GloVe("glove/glove.6B.100d.txt"),
         hyperparams["lstm_hiddin_dim"],
         hyperparams["lstm_layers"],
         hyperparams["lstm_dropout"],
