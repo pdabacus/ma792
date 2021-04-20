@@ -15,7 +15,7 @@ glove_file_out="glove.6B.100d.txt"
 glove_outdir="glove"
 
 py1_url="https://raw.githubusercontent.com/pdabacus/ma792/main/glove.py"
-py1_md5="3bcad125b211f7b9171d87bab1732b56"
+py1_md5="af82391c9585b248c2f3510024f04e2f"
 py1_out="glove.py"
 
 py2_url="https://raw.githubusercontent.com/pdabacus/ma792/main/imdb.py"

@@ -9,11 +9,13 @@ _version = "1.0.0"
 _file = "glove/glove.6B.100d.txt"
 
 class GloVe():
-    _embed = dict()
-    _vectors = list()
+    _embed = None
+    _vectors = None
 
     def __init__(self, file=_file):
         self._file = file
+        self._embed = dict()
+        self._vectors = list()
         print("building word embedding from %s" % file)
         f = open(file, "r")
         index = 0
@@ -54,6 +56,15 @@ class GloVe():
             return words[0]
         else:
             return words
+
+    def encode(self, processed_sentence, final_length):
+        n = len(processed_sentence)
+        r = [self._embed.get(w, 0) for w in processed_sentence]
+        if n < final_length:
+            r += [0]* (final_length-n)
+        else:
+            r = r[:final_length]
+        return r
 
 
 def main():
