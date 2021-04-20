@@ -22,6 +22,10 @@ py2_url="https://raw.githubusercontent.com/pdabacus/ma792/main/imdb.py"
 py2_md5="ec433bdc266a4733b3f4c663a2f4663d"
 py2_out="imdb.py"
 
+py3_url="https://raw.githubusercontent.com/pdabacus/ma792/main/rnn.py"
+py3_md5="2d568e56d1979ab417977814ff828ac4"
+py3_out="rnn.py"
+
 if ! [ -d "downloads" ]; then
     mkdir -p "downloads"
 fi
@@ -108,6 +112,23 @@ if [ -f "$py2_out" ]; then
 else
     echo "downloading code $py2_out"
     curl -L "$py2_url" -o "$py2_out"
+fi
+
+echo
+echo "################"
+echo
+
+if [ -f "$py3_out" ]; then
+    m=$(md5sum "$py3_out" | awk '{print $1}')
+    if [ $m = $py3_md5 ]; then
+        echo "using downloaded code $py3_out"
+    else
+        echo "redownloading code"
+        curl -L "$py3_url" -o "$py3_out"
+    fi
+else
+    echo "downloading code $py3_out"
+    curl -L "$py3_url" -o "$py3_out"
 fi
 
 echo
