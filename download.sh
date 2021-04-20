@@ -1,5 +1,5 @@
 #!/bin/bash
-# prep.sh
+# download.sh
 # download and extract imdb data set and GloVe 6B word vectors
 
 imdb_url="http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz"
@@ -13,6 +13,14 @@ glove_md5="056ea991adb4740ac6bf1b6d9b50408b"
 glove_out="downloads/glove.6B.zip"
 glove_file_out="glove.6B.100d.txt"
 glove_outdir="glove"
+
+py1_url="https://raw.githubusercontent.com/pdabacus/ma792/main/glove.py"
+py1_md5="3bcad125b211f7b9171d87bab1732b56"
+py1_out="glove.py"
+
+py2_url="https://raw.githubusercontent.com/pdabacus/ma792/main/imdb.py"
+py2_md5="ec433bdc266a4733b3f4c663a2f4663d"
+py2_out="imdb.py"
 
 if ! [ -d "downloads" ]; then
     mkdir -p "downloads"
@@ -67,3 +75,39 @@ unzip "$glove_out" "$glove_file_out" -d "$glove_outdir"
 echo
 
 du -sh "$glove_outdir"
+
+echo
+echo "################"
+echo
+
+if [ -f "$py1_out" ]; then
+    m=$(md5sum "$py1_out" | awk '{print $1}')
+    if [ $m = $py1_md5 ]; then
+        echo "using downloaded code $py1_out"
+    else
+        echo "redownloading code"
+        curl -L "$py1_url" -o "$py1_out"
+    fi
+else
+    echo "downloading code $py1_out"
+    curl -L "$py1_url" -o "$py1_out"
+fi
+
+echo
+echo "################"
+echo
+
+if [ -f "$py2_out" ]; then
+    m=$(md5sum "$py2_out" | awk '{print $1}')
+    if [ $m = $py2_md5 ]; then
+        echo "using downloaded code $py2_out"
+    else
+        echo "redownloading code"
+        curl -L "$py2_url" -o "$py2_out"
+    fi
+else
+    echo "downloading code $py2_out"
+    curl -L "$py2_url" -o "$py2_out"
+fi
+
+echo
