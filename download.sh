@@ -23,12 +23,16 @@ py2_md5="ec433bdc266a4733b3f4c663a2f4663d"
 py2_out="imdb.py"
 
 py3_url="https://raw.githubusercontent.com/pdabacus/ma792/main/rnn.py"
-py3_md5="2d568e56d1979ab417977814ff828ac4"
+py3_md5="d4877cfefbac29e04588617530ce8796"
 py3_out="rnn.py"
 
 rnn_url="https://github.com/pdabacus/ma792/releases/download/v1.5/happy_angry_rnn.pt"
 rnn_md5="6496827b1e315add3d2f0efdf5d36114"
 rnn_out="happy_angry_rnn.pt"
+
+elon_url="https://raw.githubusercontent.com/pdabacus/ma792/main/rnn.py"
+elon_md5="45703154deefa7305bac462283ed12df"
+elon_out="elon_tweets.json"
 
 if ! [ -d "downloads" ]; then
     mkdir -p "downloads"
@@ -150,6 +154,23 @@ if [ -f "$rnn_out" ]; then
 else
     echo "downloading pytorch model $rnn_out"
     curl -L "$rnn_url" -o "$rnn_out"
+fi
+
+echo
+echo "################"
+echo
+
+if [ -f "$elon_out" ]; then
+    m=$(md5sum "$elon_out" | awk '{print $1}')
+    if [ $m = $elon_md5 ]; then
+        echo "using downloaded tweets $elon_out"
+    else
+        echo "redownloading elon tweets"
+        curl -L "$elon_url" -o "$elon_out"
+    fi
+else
+    echo "downloading elon tweets $elon_out"
+    curl -L "$elon_url" -o "$elon_out"
 fi
 
 echo
