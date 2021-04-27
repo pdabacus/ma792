@@ -32,9 +32,17 @@ rnn_url="https://github.com/pdabacus/ma792/releases/download/v1.5/happy_angry_rn
 rnn_md5="6496827b1e315add3d2f0efdf5d36114"
 rnn_out="happy_angry_rnn.pt"
 
+tweet_url="https://raw.githubusercontent.com/pdabacus/ma792/main/gather_tweets.ipynb"
+tweet_md5="a1b053ca38bbbf5eef344f015b92f13d"
+tweet_out="gather_tweets.ipynb"
+
 elon_url="https://raw.githubusercontent.com/pdabacus/ma792/main/elon_tweets.json"
 elon_md5="45703154deefa7305bac462283ed12df"
 elon_out="elon_tweets.json"
+
+stock_url="https://raw.githubusercontent.com/pdabacus/ma792/main/gather_stocks.ipynb"
+stock_md5="74a088b04a73160461c0c605306ee2c1"
+stock_out="gather_stocks.ipynb"
 
 tsla_url="https://raw.githubusercontent.com/pdabacus/ma792/main/tsla_doge_prices.json"
 tsla_md5="0645e8ad36d1806d9cee98da3f234e61"
@@ -167,6 +175,24 @@ echo
 echo "################"
 echo
 
+if [ -f "$tweet_out" ]; then
+    m=$(md5sum "$tweet_out" | awk '{print $1}')
+    if [ $m = $tweet_md5 ]; then
+        echo "using downloaded notebook $tweet_out"
+    else
+        echo "redownloading notebook"
+        curl -L "$tweet_url" -o "$tweet_out"
+    fi
+else
+    echo "downloading notebook $tweet_out"
+    curl -L "$tweet_url" -o "$tweet_out"
+fi
+
+echo
+echo "################"
+echo
+
+
 if [ -f "$elon_out" ]; then
     m=$(md5sum "$elon_out" | awk '{print $1}')
     if [ $m = $elon_md5 ]; then
@@ -178,6 +204,23 @@ if [ -f "$elon_out" ]; then
 else
     echo "downloading elon tweets $elon_out"
     curl -L "$elon_url" -o "$elon_out"
+fi
+
+echo
+echo "################"
+echo
+
+if [ -f "$stock_out" ]; then
+    m=$(md5sum "$stock_out" | awk '{print $1}')
+    if [ $m = $stock_md5 ]; then
+        echo "using downloaded notebook $stock_out"
+    else
+        echo "redownloading notebook"
+        curl -L "$stock_url" -o "$stock_out"
+    fi
+else
+    echo "downloading notebook $stock_out"
+    curl -L "$stock_url" -o "$stock_out"
 fi
 
 echo
@@ -197,5 +240,8 @@ else
     curl -L "$tsla_url" -o "$tsla_out"
 fi
 
+echo
+echo "################"
+echo
 echo
 echo "finished downloading needed data"
