@@ -8,9 +8,11 @@ imdb_out="downloads/imdb.tar.gz"
 imdb_outdir="aclImdb"
 imdb_outdir2="imdb"
 
-glove_url="http://nlp.stanford.edu/data/glove.6B.zip"
-glove_md5="056ea991adb4740ac6bf1b6d9b50408b"
-glove_out="downloads/glove.6B.zip"
+#glove_url="http://nlp.stanford.edu/data/glove.6B.zip"
+#glove_md5="056ea991adb4740ac6bf1b6d9b50408b"
+glove_url="https://github.com/pdabacus/ma792/releases/download/v1.6/glove.6B.100d.txt.gz"
+glove_md5="17893ea728ac3573ad3ad2ba32c28d94"
+glove_out="downloads/glove.6B.100d.txt.gz"
 glove_file_out="glove.6B.100d.txt"
 glove_outdir="glove"
 
@@ -87,7 +89,8 @@ fi
 
 echo "extracting glove model to $glove_outdir/"
 rm -rf "$glove_outdir"
-unzip "$glove_out" "$glove_file_out" -d "$glove_outdir"
+mkdir "$glove_outdir"
+gunzip -c "$glove_out" > "$glove_outdir/$glove_file_out"
 echo
 
 du -sh "$glove_outdir"
