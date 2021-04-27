@@ -30,9 +30,13 @@ rnn_url="https://github.com/pdabacus/ma792/releases/download/v1.5/happy_angry_rn
 rnn_md5="6496827b1e315add3d2f0efdf5d36114"
 rnn_out="happy_angry_rnn.pt"
 
-elon_url="https://raw.githubusercontent.com/pdabacus/ma792/main/rnn.py"
+elon_url="https://raw.githubusercontent.com/pdabacus/ma792/main/elon_tweets.json"
 elon_md5="45703154deefa7305bac462283ed12df"
 elon_out="elon_tweets.json"
+
+tsla_url="https://raw.githubusercontent.com/pdabacus/ma792/main/tsla_doge_prices.json"
+tsla_md5="0645e8ad36d1806d9cee98da3f234e61"
+tsla_out="tsla_doge_prices.json"
 
 if ! [ -d "downloads" ]; then
     mkdir -p "downloads"
@@ -171,6 +175,23 @@ if [ -f "$elon_out" ]; then
 else
     echo "downloading elon tweets $elon_out"
     curl -L "$elon_url" -o "$elon_out"
+fi
+
+echo
+echo "################"
+echo
+
+if [ -f "$tsla_out" ]; then
+    m=$(md5sum "$tsla_out" | awk '{print $1}')
+    if [ $m = $tsla_md5 ]; then
+        echo "using downloaded stock prices $tsla_out"
+    else
+        echo "redownloading tsla prices"
+        curl -L "$tsla_url" -o "$tsla_out"
+    fi
+else
+    echo "downloading tsla prices $tsla_out"
+    curl -L "$tsla_url" -o "$tsla_out"
 fi
 
 echo
